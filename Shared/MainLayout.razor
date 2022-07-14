@@ -1,0 +1,59 @@
+﻿@inherits LayoutComponentBase /*The LayoutComponentBase defines a Body property (RenderFragment type) for the rendered content inside the layout.*/
+
+@*make the content section fills all free space
+    The solution was took from here 
+    https://stackoverflow.com/questions/90178/make-a-div-fill-the-height-of-the-remaining-screen-space
+*@
+
+<style>
+    body, #app {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* body takes whole viewport's height */
+    }
+
+    .full-height {
+        flex: 1; /* this will make the container take the free space */
+        background: tomato;
+        padding-top: 3vh;
+        padding-bottom: 3vh;
+    }
+</style>
+
+@* ===== layout section ====== *@
+
+<header class="px-4">
+    <h1>Doctor Who™ Episode Database</h1>
+</header>
+
+<div class="top-row px-4 auth">
+    <LoginDisplay />
+    @*<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>*@
+</div>
+@*
+<nav class="sidebar">
+    <NavMenu />
+</nav>*@
+
+<main class="full-height">
+    <article class="px-4">
+        @Body
+    </article>
+</main>
+
+<footer>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-text">
+                <a class="navbar-brand" href="#">@FooterMessage</a>
+            </span>
+        </div>
+    </nav>
+</footer>
+
+@* ===== code section ====== *@
+@code {
+    public string FooterMessage { get; set; } =
+        "Doctor Who is a registered trademark of the BBC. " +
+        "https://www.doctorwho.tv/";
+}
